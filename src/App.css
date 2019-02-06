@@ -10,3 +10,13 @@
 .header-name {
   color: #03895e;
 }
+
+.menu-item {
+  color: #03895e !important;
+}
+
+.menu-title {
+  text-align: center;
+  font-family: 'Changa', sans-serif;
+
+}

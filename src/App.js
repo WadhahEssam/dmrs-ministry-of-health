@@ -10,12 +10,12 @@ import Pharmacies from './components/Pharmacies';
 
 
 class App extends Component {
-  state = { activeItem: 'انشاء الشبكة' }
+  state = { activeItem: 'تفاصيل الشبكة' }
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   renderContent = () => {
     switch (this.state.activeItem) {
-      case 'انشاء الشبكة':
+      case 'تفاصيل الشبكة':
         return <CreateNetwork />;
       case 'المستشفيات': 
         return <Hospitals />;
@@ -34,18 +34,21 @@ class App extends Component {
               <Input className='icon' icon='search' placeholder='Search...' />
             </Menu.Item>
             <Menu.Item
+              className="menu-item"
               name="المستشفيات"
               active={activeItem === 'المستشفيات'}
               onClick={this.handleItemClick}
             />
             <Menu.Item
+              className="menu-item"
               name="الصيدليات"
               active={activeItem === 'الصيدليات'}
               onClick={this.handleItemClick}
             />
             <Menu.Item
-              name="انشاء الشبكة"
-              active={activeItem === 'انشاء الشبكة'}
+              className="menu-item"
+              name="تفاصيل الشبكة"
+              active={activeItem === 'تفاصيل الشبكة'}
               onClick={this.handleItemClick}
               position="left"
             />
