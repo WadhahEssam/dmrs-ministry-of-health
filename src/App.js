@@ -4,11 +4,25 @@ import logo from './img/logo.png';
 import { Container } from 'semantic-ui-react';
 import { Input } from 'semantic-ui-react'
 import { Button, Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react'
+import CreateNetwork from './components/CreateNetwork';
+import Hospitals from './components/Hospitals';
+import Pharmacies from './components/Pharmacies';
 
 
 class App extends Component {
   state = { activeItem: 'انشاء الشبكة' }
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
+  renderContent = () => {
+    switch (this.state.activeItem) {
+      case 'انشاء الشبكة':
+        return <CreateNetwork />;
+      case 'المستشفيات': 
+        return <Hospitals />;
+      case 'الصيدليات':
+        return <Pharmacies />;
+    }
+  }
 
   render() {
     const { activeItem } = this.state
@@ -46,24 +60,9 @@ class App extends Component {
 
           <Container style={{paddingTop: 20}}>
             <Container>
-              <Segment>
-                Medicl Records
-              </Segment>
-            </Container>
-
-            <Container>
-              <Segment>
-                Medicl Records
-              </Segment>
-            </Container>
-
-            <Container>
-              <Segment>
-                Medicl Records
-              </Segment>
+              {this.renderContent()}
             </Container>
           </Container>
-
       </div>
     );
   }
