@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Header, Icon, Image, Menu, Segment, Sidebar, Grid, Card, Label} from 'semantic-ui-react'
+import { Segment, Grid, Card, Label} from 'semantic-ui-react'
 
 export default class CreateNetwork extends Component {
   render() {
@@ -12,7 +12,7 @@ export default class CreateNetwork extends Component {
           <Grid columns={3}>
             <Grid.Row>
               <Grid.Column>
-                <Card>
+                <Card fluid>
                   <Card.Header style={{padding: 10}}>
                     <p className="details-title">Contract Address</p>
                   </Card.Header>
@@ -35,7 +35,7 @@ export default class CreateNetwork extends Component {
                 </Card>
               </Grid.Column>
               <Grid.Column>
-                <Card>
+                <Card fluid>
                   <Card.Header style={{padding: 10}}>
                     <p className="details-title">Ministry Of Health Address</p>
                   </Card.Header>
@@ -48,7 +48,7 @@ export default class CreateNetwork extends Component {
             {/* row 2 */}
             <Grid.Row>
               <Grid.Column>
-                <Card>
+                <Card fluid>
                   <Card.Header style={{padding: 10}}>
                     <p className="details-title">Number of pharmacies</p>
                   </Card.Header>
@@ -58,7 +58,7 @@ export default class CreateNetwork extends Component {
                 </Card>
               </Grid.Column>
               <Grid.Column>
-                <Card>
+                <Card fluid>
                   <Card.Header style={{padding: 10}}>
                     <p className="details-title">Number of hospitals</p>
                   </Card.Header>
@@ -68,7 +68,7 @@ export default class CreateNetwork extends Component {
                 </Card>
               </Grid.Column>
               <Grid.Column>
-                <Card>
+                <Card fluid>
                   <Card.Header style={{padding: 10}}>
                     <p className="details-title">Number of medical records</p>
                   </Card.Header>

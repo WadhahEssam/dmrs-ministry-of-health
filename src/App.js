@@ -7,7 +7,8 @@ import { Button, Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui
 import CreateNetwork from './components/CreateNetwork';
 import Hospitals from './components/Hospitals';
 import Pharmacies from './components/Pharmacies';
-
+import web3 from './web3';
+import lottery from './medicalRecordsSystemContract';
 
 class App extends Component {
   state = { activeItem: 'Network Details' }
@@ -22,6 +23,12 @@ class App extends Component {
       case 'Pharmacies':
         return <Pharmacies />;
     }
+  }
+
+  async componentDidMount() {
+    const managerAddress = await lottery.methods.ministryOfHealth().call();
+    console.log(managerAddress);
+
   }
 
   render() {
