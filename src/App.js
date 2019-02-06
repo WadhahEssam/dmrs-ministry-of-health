@@ -10,16 +10,16 @@ import Pharmacies from './components/Pharmacies';
 
 
 class App extends Component {
-  state = { activeItem: 'تفاصيل الشبكة' }
+  state = { activeItem: 'Network Details' }
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   renderContent = () => {
     switch (this.state.activeItem) {
-      case 'تفاصيل الشبكة':
+      case 'Network Details':
         return <CreateNetwork />;
-      case 'المستشفيات': 
+      case 'Hospitals': 
         return <Hospitals />;
-      case 'الصيدليات':
+      case 'Pharmacies':
         return <Pharmacies />;
     }
   }
@@ -35,26 +35,26 @@ class App extends Component {
             </Menu.Item>
             <Menu.Item
               className="menu-item"
-              name="المستشفيات"
-              active={activeItem === 'المستشفيات'}
+              name="Hospitals"
+              active={activeItem === 'Hospitals'}
               onClick={this.handleItemClick}
             />
             <Menu.Item
               className="menu-item"
-              name="الصيدليات"
-              active={activeItem === 'الصيدليات'}
+              name="Pharmacies"
+              active={activeItem === 'Pharmacies'}
               onClick={this.handleItemClick}
             />
             <Menu.Item
               className="menu-item"
-              name="تفاصيل الشبكة"
-              active={activeItem === 'تفاصيل الشبكة'}
+              name="Network Details"
+              active={activeItem === 'Network Details'}
               onClick={this.handleItemClick}
               position="left"
             />
 
             <Menu.Item position="right">
-               <p className="header-name">وزارة الصحة السعودية</p>
+               <p className="header-name">Ministry Of Health</p>
             </Menu.Item>
             <Menu.Item >
               <img src={logo} className="logo" alt="logo" />

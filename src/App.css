@@ -18,5 +18,10 @@
 .menu-title {
   text-align: center;
   font-family: 'Changa', sans-serif;
+}
 
+.details-title {
+  font-weight: 600;
+  padding-bottom: 5px;
+  padding-top: 5px;
 }
