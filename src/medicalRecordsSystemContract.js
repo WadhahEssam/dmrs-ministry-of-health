@@ -1,77 +1,7 @@
 import web3 from './web3';
 
-export const contractAddress = '0xa2aC18f4d5CdFeAd40A27E96a9E0306106Bf8984';
+export const contractAddress = '0x2128C0Cb8F8c632E418a09777A38C3521c0f9A0B';
 const contractABI = [
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "getHospitalsCount",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "nationalIDI",
-				"type": "uint256"
-			}
-		],
-		"name": "getMedicalRecord",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "pharmacyAddresses",
-		"outputs": [
-			{
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "pharmacyAddressI",
-				"type": "address"
-			},
-			{
-				"name": "pharmacyName",
-				"type": "string"
-			}
-		],
-		"name": "addPharmacy",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
 	{
 		"constant": false,
 		"inputs": [
@@ -91,22 +21,21 @@ const contractABI = [
 		"type": "function"
 	},
 	{
-		"constant": true,
+		"constant": false,
 		"inputs": [
 			{
-				"name": "nationalIDI",
-				"type": "uint256"
-			}
-		],
-		"name": "checkMedicalRecord",
-		"outputs": [
+				"name": "pharmacyAddressI",
+				"type": "address"
+			},
 			{
-				"name": "",
-				"type": "bool"
+				"name": "pharmacyName",
+				"type": "string"
 			}
 		],
+		"name": "addPharmacy",
+		"outputs": [],
 		"payable": false,
-		"stateMutability": "view",
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -148,64 +77,24 @@ const contractABI = [
 		"type": "function"
 	},
 	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "medicalRecords",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
+		"inputs": [],
 		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
+		"stateMutability": "nonpayable",
+		"type": "constructor"
 	},
 	{
 		"constant": true,
 		"inputs": [
 			{
-				"name": "",
+				"name": "nationalIDI",
 				"type": "uint256"
 			}
 		],
-		"name": "hospitals",
+		"name": "checkMedicalRecord",
 		"outputs": [
-			{
-				"name": "name",
-				"type": "string"
-			},
-			{
-				"name": "networkAddress",
-				"type": "address"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
 			{
 				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "pharmacies",
-		"outputs": [
-			{
-				"name": "name",
-				"type": "string"
-			},
-			{
-				"name": "networkAddress",
-				"type": "address"
+				"type": "bool"
 			}
 		],
 		"payable": false,
@@ -215,7 +104,26 @@ const contractABI = [
 	{
 		"constant": true,
 		"inputs": [],
-		"name": "ministryOfHealth",
+		"name": "getHospitalsCount",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "nationalIDI",
+				"type": "uint256"
+			}
+		],
+		"name": "getMedicalRecord",
 		"outputs": [
 			{
 				"name": "",
@@ -260,11 +168,116 @@ const contractABI = [
 		"type": "function"
 	},
 	{
-		"inputs": [],
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "hospitals",
+		"outputs": [
+			{
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"name": "networkAddress",
+				"type": "address"
+			}
+		],
 		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "constructor"
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "medicalRecords",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "medicalRecordsCount",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "ministryOfHealth",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "pharmacies",
+		"outputs": [
+			{
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"name": "networkAddress",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "pharmacyAddresses",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
 	}
 ]
-
 export default new web3.eth.Contract(contractABI, contractAddress);

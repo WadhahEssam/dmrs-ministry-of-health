@@ -3,11 +3,12 @@ import { Segment, Grid, Card, Label} from 'semantic-ui-react'
 
 export default class CreateNetwork extends Component {
   render() {
+    const { networkDetails } = this.props;
     return (
       <div>
         <h1 style={{marginBottom: 16, marginTop: 20}} className="menu-title">Network Details</h1>  
 
-        <Segment padded>
+        <Segment padded style={{paddingLeft: 50}}>
           {/* row 1 */}
           <Grid columns={3}>
             <Grid.Row>
@@ -17,7 +18,7 @@ export default class CreateNetwork extends Component {
                     <p className="details-title">Contract Address</p>
                   </Card.Header>
                   <Card.Content >
-                    <p dir="ltr" style={{overflow: 'hidden'}}>0x0F1A4e8401AFd1cb0524663d191774091EdccA26</p>
+                    <p dir="ltr" style={{overflow: 'hidden'}}>{networkDetails.medicalRecordsContractAddress}</p>
                   </Card.Content>
                 </Card>
               </Grid.Column>
@@ -30,7 +31,7 @@ export default class CreateNetwork extends Component {
                     </Label>
                   </Card.Header>
                   <Card.Content>
-                    <p dir="ltr" style={{overflow: 'hidden'}}>0x0F1A4e8401AFd1cb0524663d191774091EdccA26</p>
+                    <p dir="ltr" style={{overflow: 'hidden'}}>{networkDetails.currentAddress}</p>
                   </Card.Content>
                 </Card>
               </Grid.Column>
@@ -40,7 +41,7 @@ export default class CreateNetwork extends Component {
                     <p className="details-title">Ministry Of Health Address</p>
                   </Card.Header>
                   <Card.Content>
-                    <p dir="ltr" style={{overflow: 'hidden'}}>0x0F1A4e8401AFd1cb0524663d191774091EdccA26</p>  
+                    <p style={{overflow: 'hidden'}}>{networkDetails.ministryOfHealthAddress}</p>  
                   </Card.Content>
                 </Card>
               </Grid.Column>
@@ -53,7 +54,7 @@ export default class CreateNetwork extends Component {
                     <p className="details-title">Number of pharmacies</p>
                   </Card.Header>
                   <Card.Content>
-                    12
+                    {networkDetails.pharmaciesCount}
                   </Card.Content>
                 </Card>
               </Grid.Column>
@@ -63,7 +64,7 @@ export default class CreateNetwork extends Component {
                     <p className="details-title">Number of hospitals</p>
                   </Card.Header>
                   <Card.Content>
-                    223
+                    {networkDetails.hospitalsCount}
                   </Card.Content>
                 </Card>
               </Grid.Column>
@@ -73,7 +74,7 @@ export default class CreateNetwork extends Component {
                     <p className="details-title">Number of medical records</p>
                   </Card.Header>
                   <Card.Content>
-                    15
+                    {networkDetails.medicalRecordsCount}
                   </Card.Content>
                 </Card>
               </Grid.Column>

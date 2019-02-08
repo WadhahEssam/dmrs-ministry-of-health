@@ -12,13 +12,23 @@ import contract from './medicalRecordsSystemContract';
 import { contractAddress } from './medicalRecordsSystemContract';
 
 class App extends Component {
-  state = { activeItem: 'Network Details' }
+  state = { 
+    activeItem: 'Network Details',
+    networkDetails: {
+      ministryOfHealthAddress: null,
+      medicalRecordsContractAddress: null,
+      currentAddress: null,
+      pharmaciesCount: 0,
+      hospitalsCount: 0,
+      medicalRecordsCount: 0,
+    }
+  }
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   renderContent = () => {
     switch (this.state.activeItem) {
       case 'Network Details':
-        return <CreateNetwork />;
+        return <CreateNetwork networkDetails={this.state.networkDetails} />;
       case 'Hospitals': 
         return <Hospitals />;
       case 'Pharmacies':
@@ -27,17 +37,27 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    const managerAddress = await contract.methods.ministryOfHealth().call();
-    const ministryOfHealthContractAddress = contractAddress;
-    const currentAddress = await web3.eth.getAccounts()[0];
+    const ministryOfHealthAddress = await contract.methods.ministryOfHealth().call();
+    const medicalRecordsContractAddress = contractAddress;
+    const currentAddress = await web3.eth.getAccounts();
     const hospitalsCount = await contract.methods.getHospitalsCount().call();
     const pharmaciesCount = await contract.methods.getPharmaciesCount().call();
-    console.log(pharmaciesCount);
+    const medicalRecordsCount = await contract.methods.medicalRecordsCount().call();
+    this.setState({ 
+      networkDetails: {
+        ministryOfHealthAddress, 
+        medicalRecordsContractAddress, 
+        currentAddress: currentAddress[0], 
+        hospitalsCount, 
+        pharmaciesCount, 
+        medicalRecordsCount
+      }
+    });
   }
 
   render() {
     const { activeItem } = this.state
-
+    console.log(this.state);
     return (
       <div>
           <Menu attached="top" stackable pointing >
