@@ -4,6 +4,7 @@ import { Segment, Grid, Card, Label} from 'semantic-ui-react'
 export default class CreateNetwork extends Component {
   render() {
     const { networkDetails } = this.props;
+    const isAllowed = (networkDetails.currentAddress === networkDetails.ministryOfHealthAddress);
     return (
       <div>
         <h1 style={{marginBottom: 16, marginTop: 20}} className="menu-title">Network Details</h1>  
@@ -23,11 +24,11 @@ export default class CreateNetwork extends Component {
                 </Card>
               </Grid.Column>
               <Grid.Column>
-                <Card fluid color='red'>
+                <Card fluid color={ isAllowed ? 'green' : 'red' } >
                   <Card.Header style={{padding: 10}}>
                     <p className="details-title" style={{display: 'inline', paddingRight: 10}}>Your Account Address</p>      
-                    <Label basic color='red' pointing='left'>
-                      Not Allowed
+                    <Label basic color={ isAllowed ? 'green' : 'red' } pointing='left'>
+                      { isAllowed ? 'Allowed' : 'Not Allowed' }
                     </Label>
                   </Card.Header>
                   <Card.Content>
