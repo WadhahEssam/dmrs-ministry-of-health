@@ -1,7 +1,21 @@
 import web3 from './web3';
 
-const lotteryContractAddress = '0x2131c04377e47f5c6186c0eff0f8e701eafc5a4c';
-const lotteryContractABI = [
+export const contractAddress = '0xa2aC18f4d5CdFeAd40A27E96a9E0306106Bf8984';
+const contractABI = [
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getHospitalsCount",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
 	{
 		"constant": true,
 		"inputs": [
@@ -22,20 +36,6 @@ const lotteryContractABI = [
 		"type": "function"
 	},
 	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "hospitalAddressI",
-				"type": "address"
-			}
-		],
-		"name": "addHospital",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"constant": true,
 		"inputs": [
 			{
@@ -52,6 +52,42 @@ const lotteryContractABI = [
 		],
 		"payable": false,
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "pharmacyAddressI",
+				"type": "address"
+			},
+			{
+				"name": "pharmacyName",
+				"type": "string"
+			}
+		],
+		"name": "addPharmacy",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "hospitalAddressI",
+				"type": "address"
+			},
+			{
+				"name": "hospitalName",
+				"type": "string"
+			}
+		],
+		"name": "addHospital",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -132,6 +168,52 @@ const lotteryContractABI = [
 	},
 	{
 		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "hospitals",
+		"outputs": [
+			{
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"name": "networkAddress",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "pharmacies",
+		"outputs": [
+			{
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"name": "networkAddress",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
 		"inputs": [],
 		"name": "ministryOfHealth",
 		"outputs": [
@@ -145,17 +227,17 @@ const lotteryContractABI = [
 		"type": "function"
 	},
 	{
-		"constant": false,
-		"inputs": [
+		"constant": true,
+		"inputs": [],
+		"name": "getPharmaciesCount",
+		"outputs": [
 			{
-				"name": "pharmacyAddressI",
-				"type": "address"
+				"name": "",
+				"type": "uint256"
 			}
 		],
-		"name": "addPharmacy",
-		"outputs": [],
 		"payable": false,
-		"stateMutability": "nonpayable",
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -185,4 +267,4 @@ const lotteryContractABI = [
 	}
 ]
 
-export default new web3.eth.Contract(lotteryContractABI, lotteryContractAddress);
+export default new web3.eth.Contract(contractABI, contractAddress);

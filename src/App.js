@@ -8,7 +8,8 @@ import CreateNetwork from './components/CreateNetwork';
 import Hospitals from './components/Hospitals';
 import Pharmacies from './components/Pharmacies';
 import web3 from './web3';
-import lottery from './medicalRecordsSystemContract';
+import contract from './medicalRecordsSystemContract';
+import { contractAddress } from './medicalRecordsSystemContract';
 
 class App extends Component {
   state = { activeItem: 'Network Details' }
@@ -26,9 +27,12 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    const managerAddress = await lottery.methods.ministryOfHealth().call();
-    console.log(managerAddress);
-
+    const managerAddress = await contract.methods.ministryOfHealth().call();
+    const ministryOfHealthContractAddress = contractAddress;
+    const currentAddress = await web3.eth.getAccounts()[0];
+    const hospitalsCount = await contract.methods.getHospitalsCount().call();
+    const pharmaciesCount = await contract.methods.getPharmaciesCount().call();
+    console.log(pharmaciesCount);
   }
 
   render() {
