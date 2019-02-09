@@ -22,7 +22,8 @@ class App extends Component {
       pharmaciesCount: 0,
       hospitalsCount: 0,
       medicalRecordsCount: 0,
-    }
+    },
+    hospitals: null,
   }
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
@@ -31,17 +32,18 @@ class App extends Component {
       case 'Network Details':
         return <CreateNetwork networkDetails={this.state.networkDetails} isAllowed={this.state.isAllowed}/>;
       case 'Hospitals': 
-        return <Hospitals />;
+        return <Hospitals hospitals={this.state.hospitals} isAllowed={this.state.isAllowed} />;
       case 'Pharmacies':
         return <Pharmacies />;
     }
   }
 
   async componentDidMount() {
-    this.fetchNetworkDetails();
+    await this.fetchData();
+    await this.fetchHospitals();
   }
 
-  async fetchNetworkDetails() {
+  fetchData = async () => {
     const ministryOfHealthAddress = await contract.methods.ministryOfHealth().call();
     const medicalRecordsContractAddress = contractAddress;
     const currentAddress = await web3.eth.getAccounts();
@@ -49,6 +51,8 @@ class App extends Component {
     const pharmaciesCount = await contract.methods.getPharmaciesCount().call();
     const medicalRecordsCount = await contract.methods.medicalRecordsCount().call();
     const isAllowed = (currentAddress[0] === ministryOfHealthAddress);
+    // console.log(await contract.options.address);
+    // console.log(await web3.eth.getTransaction('0xa40e02a95685b709116cf45b0ecc7e40fe0567ef5579157fda4b46dc328ed4c1'));
     this.setState({ 
       isAllowed,
       networkDetails: {
@@ -62,9 +66,18 @@ class App extends Component {
     });
   }
 
+  fetchHospitals = async () => {
+    let hospitals = [];
+    const hospitalsCount = this.state.networkDetails.hospitalsCount;
+    for (let i = 0; i < hospitalsCount; i++) {
+      hospitals.push(await contract.methods.hospitals(i).call());
+    }
+    this.setState({hospitals});
+  }
+
   render() {
     const { activeItem } = this.state
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <div>
           <Menu attached="top" stackable pointing >
