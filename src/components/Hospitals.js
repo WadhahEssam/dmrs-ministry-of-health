@@ -1,29 +1,10 @@
 import React, { Component } from 'react'
 import { Segment, Table, Grid, Card, Label} from 'semantic-ui-react'
 
-import logo from '../img/logo.png';
-
-
 export default class Hospitals extends Component {
-  renderTable = () => {
-    const { hospitals } = this.props;
-
-    for (let i = 0; i < hospitals.length; i++) {
-      return (
-        <Table.Row>
-          <Table.Cell>{i+1}</Table.Cell>
-          <Table.Cell>{hospitals[i].name}</Table.Cell>
-          <Table.Cell>{hospitals[i].networkAddress}</Table.Cell>
-          <Table.Cell>September 14, 2013</Table.Cell>
-        </Table.Row> 
-      );
-    }
-
-    hospitals
-  }
 
   render() { 
-    const { hospitals } = this.props;
+    const { hospitals, isAllowed } = this.props;
 
     let tableBody;
     if (hospitals != null) {
@@ -38,8 +19,7 @@ export default class Hospitals extends Component {
         );
       });
     }
-
-
+    
     return (
       <div>
         <h1 className="menu-title">Hospitals</h1>
@@ -58,7 +38,6 @@ export default class Hospitals extends Component {
             </Table.Body>
           </Table>
         </Segment>
-
       </div>
     )
   }

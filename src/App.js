@@ -24,6 +24,7 @@ class App extends Component {
       medicalRecordsCount: 0,
     },
     hospitals: null,
+    pharmacies: null,
   }
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
@@ -34,13 +35,14 @@ class App extends Component {
       case 'Hospitals': 
         return <Hospitals hospitals={this.state.hospitals} isAllowed={this.state.isAllowed} />;
       case 'Pharmacies':
-        return <Pharmacies />;
+        return <Pharmacies pharmacies={this.state.pharmacies} isAllowed={this.state.isAllowed} />;
     }
   }
 
   async componentDidMount() {
     await this.fetchData();
     await this.fetchHospitals();
+    await this.fetchPharmacies();
   }
 
   fetchData = async () => {
@@ -75,9 +77,18 @@ class App extends Component {
     this.setState({hospitals});
   }
 
+  fetchPharmacies = async () => {
+    let pharmacies = [];
+    const pharmaciesCount = this.state.networkDetails.pharmaciesCount;
+    for (let i = 0; i < pharmaciesCount; i++) {
+      pharmacies.push(await contract.methods.pharmacies(i).call());
+    }
+    this.setState({pharmacies});
+  }
+
   render() {
     const { activeItem } = this.state
-    // console.log(this.state);
+    console.log(this.state);
     return (
       <div>
           <Menu attached="top" stackable pointing >
