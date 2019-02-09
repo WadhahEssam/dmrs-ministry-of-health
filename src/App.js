@@ -13,7 +13,8 @@ import { contractAddress } from './medicalRecordsSystemContract';
 
 class App extends Component {
   state = { 
-    activeItem: 'Network Details',
+    activeItem: 'Hospitals',
+    isAllowed: null,
     networkDetails: {
       ministryOfHealthAddress: null,
       medicalRecordsContractAddress: null,
@@ -28,7 +29,7 @@ class App extends Component {
   renderContent = () => {
     switch (this.state.activeItem) {
       case 'Network Details':
-        return <CreateNetwork networkDetails={this.state.networkDetails} />;
+        return <CreateNetwork networkDetails={this.state.networkDetails} isAllowed={this.state.isAllowed}/>;
       case 'Hospitals': 
         return <Hospitals />;
       case 'Pharmacies':
@@ -37,13 +38,19 @@ class App extends Component {
   }
 
   async componentDidMount() {
+    this.fetchNetworkDetails();
+  }
+
+  async fetchNetworkDetails() {
     const ministryOfHealthAddress = await contract.methods.ministryOfHealth().call();
     const medicalRecordsContractAddress = contractAddress;
     const currentAddress = await web3.eth.getAccounts();
     const hospitalsCount = await contract.methods.getHospitalsCount().call();
     const pharmaciesCount = await contract.methods.getPharmaciesCount().call();
     const medicalRecordsCount = await contract.methods.medicalRecordsCount().call();
+    const isAllowed = (currentAddress[0] === ministryOfHealthAddress);
     this.setState({ 
+      isAllowed,
       networkDetails: {
         ministryOfHealthAddress, 
         medicalRecordsContractAddress, 

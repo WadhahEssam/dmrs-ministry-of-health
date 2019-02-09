@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import { Segment, Grid, Card, Label} from 'semantic-ui-react'
 
+import logo from '../img/logo.png';
+
 export default class CreateNetwork extends Component {
   render() {
-    const { networkDetails } = this.props;
-    const isAllowed = (networkDetails.currentAddress === networkDetails.ministryOfHealthAddress);
+    const { networkDetails, isAllowed } = this.props;
     return (
       <div>
-        <h1 style={{marginBottom: 16, marginTop: 20}} className="menu-title">Network Details</h1>  
+        <img src={logo} className="logo-bottom" alt="logo" />
+        <h1 className="menu-title">Network Details</h1>
 
         <Segment padded style={{paddingLeft: 50}}>
           {/* row 1 */}
@@ -18,8 +20,8 @@ export default class CreateNetwork extends Component {
                   <Card.Header style={{padding: 10}}>
                     <p className="details-title">Contract Address</p>
                   </Card.Header>
-                  <Card.Content >
-                    <p dir="ltr" style={{overflow: 'hidden'}}>{networkDetails.medicalRecordsContractAddress}</p>
+                  <Card.Content>
+                    <p dir="ltr" className="addressText">{networkDetails.medicalRecordsContractAddress}</p>
                   </Card.Content>
                 </Card>
               </Grid.Column>
@@ -32,7 +34,7 @@ export default class CreateNetwork extends Component {
                     </Label>
                   </Card.Header>
                   <Card.Content>
-                    <p dir="ltr" style={{overflow: 'hidden'}}>{networkDetails.currentAddress}</p>
+                    <p className="addressText">{networkDetails.currentAddress}</p>
                   </Card.Content>
                 </Card>
               </Grid.Column>
@@ -42,7 +44,7 @@ export default class CreateNetwork extends Component {
                     <p className="details-title">Ministry Of Health Address</p>
                   </Card.Header>
                   <Card.Content>
-                    <p style={{overflow: 'hidden'}}>{networkDetails.ministryOfHealthAddress}</p>  
+                    <p className="addressText">{networkDetails.ministryOfHealthAddress}</p>  
                   </Card.Content>
                 </Card>
               </Grid.Column>
