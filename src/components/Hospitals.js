@@ -6,7 +6,7 @@ import { cloneDeep } from 'lodash';
 
 export default class Hospitals extends Component {
   state = {
-    hosptialName: "",
+    hospitalName: "",
     hospitalAddress: "",
   }
 
@@ -50,7 +50,7 @@ export default class Hospitals extends Component {
                 <label>Hospital Name</label>
                 <input 
                   value={this.state.hospitalName} 
-                  onChange={(e)=>{this.setState({hosptialName: e.target.value})}}
+                  onChange={(e)=>{this.setState({hospitalName: e.target.value})}}
                   placeholder='eg. King Khaled Hospital' 
                 />
               </Form.Field>
@@ -107,12 +107,12 @@ export default class Hospitals extends Component {
   submit = async () => {
     const { contract } = this.props;
     const accounts = await web3.eth.getAccounts();
-    await contract.methods.addHospital(this.state.hospitalAddress, this.state.hosptialName)
+    await contract.methods.addHospital(this.state.hospitalAddress, this.state.hospitalName)
       .send({ from: accounts[0] })
       .then(() => {
         this.pushNotification('success', 'Hospital added successfuly');
         let hospitals = cloneDeep(this.props.hospitals);
-        hospitals.push({name: this.state.hosptialName, networkAddress: this.state.hospitalAddress, date: Math.floor(Date.now() / 1000)});
+        hospitals.push({name: this.state.hospitalName, networkAddress: this.state.hospitalAddress, date: Math.floor(Date.now() / 1000)});
         this.setState({hospitalName: "", hospitalAddress: ""});
         this.props.setState({hospitals});
       })

@@ -1,6 +1,6 @@
 import web3 from './web3';
 
-export const contractAddress = '0x42D2Ac47334A1Ce555945495925c8723FC71C84C';
+export const contractAddress = '0x9C25b007F814CDfEdDBe9DeBECd42c4C84DC01B2';
 const contractABI = [
 	{
 		"constant": true,
