@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
-import './App.css';
-import logo from './img/logo.png';
-import { Container } from 'semantic-ui-react';
-import { Input } from 'semantic-ui-react'
-import { Button, Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react'
+import { Menu, Input, Container } from 'semantic-ui-react'
+import web3 from './web3';
+import { ToastContainer } from 'react-toastify';
 import CreateNetwork from './components/CreateNetwork';
 import Hospitals from './components/Hospitals';
 import Pharmacies from './components/Pharmacies';
-import web3 from './web3';
 import contract from './medicalRecordsSystemContract';
 import { contractAddress } from './medicalRecordsSystemContract';
+import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
+import logo from './img/logo.png';
 
 class App extends Component {
   state = { 
-    activeItem: 'Hospitals',
+    activeItem: 'Network Details',
     isAllowed: null,
     networkDetails: {
       ministryOfHealthAddress: null,
@@ -35,9 +33,23 @@ class App extends Component {
       case 'Network Details':
         return <CreateNetwork networkDetails={this.state.networkDetails} isAllowed={this.state.isAllowed}/>;
       case 'Hospitals': 
-        return <Hospitals hospitals={this.state.hospitals} isAllowed={this.state.isAllowed} />;
+        return (
+          <Hospitals 
+            hospitals={this.state.hospitals} 
+            isAllowed={this.state.isAllowed} 
+            contract={contract}
+            setState={(data) => {this.setState(data)}}
+          />
+        );
       case 'Pharmacies':
-        return <Pharmacies pharmacies={this.state.pharmacies} isAllowed={this.state.isAllowed} />;
+        return (
+          <Pharmacies 
+            pharmacies={this.state.pharmacies} 
+            isAllowed={this.state.isAllowed} 
+            contract={contract}
+            setState={(data) => {this.setState(data)}}
+          />
+        );
     }
   }
 

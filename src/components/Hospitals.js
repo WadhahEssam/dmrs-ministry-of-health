@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { Segment, Table, Grid, Card, Label, Message, Form, Button, Icon} from 'semantic-ui-react'
-import { ToastContainer, toast } from 'react-toastify';
+import { Segment, Table, Label, Message, Form, Button, Icon} from 'semantic-ui-react'
+import web3 from '../web3';
+import { toast } from 'react-toastify';
+import { cloneDeep } from 'lodash';
 
 export default class Hospitals extends Component {
   state = {
@@ -96,21 +98,50 @@ export default class Hospitals extends Component {
         <div style={{padding: 10}}/>
         <h1 className="menu-title">Add New Hospital</h1>
         {(isAllowed) ? addHospitalSegment : notAllowedToAddSegment}
+        <div style={{padding: 10}}/>
 
       </div>
     )
   }
 
-  submit = () => {
-    console.log(this.state);
-    toast.success(`${this.state.hospitalAddress}`, {
-      position: "bottom-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-    });
+  submit = async () => {
+    const { contract } = this.props;
+    const accounts = await web3.eth.getAccounts();
+    await contract.methods.addHospital(this.state.hospitalAddress, this.state.hosptialName)
+      .send({ from: accounts[0] })
+      .then(() => {
+        this.pushNotification('success', 'Hospital added successfuly');
+        let hospitals = cloneDeep(this.props.hospitals);
+        hospitals.push({name: this.state.hosptialName, networkAddress: this.state.hospitalAddress, date: Math.floor(Date.now() / 1000)});
+        this.setState({hospitalName: "", hospitalAddress: ""});
+        this.props.setState({hospitals});
+      })
+      .catch((e)=>{
+        console.log('error');
+        this.pushNotification('error', 'Something went wrong')
+      })
+  }
+
+  pushNotification = (type, message) => {
+    if (type === 'success') {
+      toast.success(message, {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    } else if (type === 'error') {
+      toast.error(`Error : ${message}`, {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    }
   }
 
   formatDate = (_date) => {

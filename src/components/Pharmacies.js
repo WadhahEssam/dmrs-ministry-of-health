@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { Segment, Table, Grid, Card, Label, Message, Form, Button, Icon} from 'semantic-ui-react'
-import { ToastContainer, toast } from 'react-toastify';
+import { Segment, Table, Label, Message, Form, Button, Icon} from 'semantic-ui-react'
+import web3 from '../web3';
+import { toast } from 'react-toastify';
+import { cloneDeep } from 'lodash';
 
 export default class Pharmacies extends Component {
   state = {
@@ -96,12 +98,51 @@ export default class Pharmacies extends Component {
         <div style={{padding: 10}}/>
         <h1 className="menu-title">Add New Pharmacy</h1>
         {(isAllowed) ? addPharmacySegment : notAllowedToAddSegment}
+        <div style={{padding: 10}}/>
+
       </div>
     )
   }
 
-  submit = () => {
-    console.log(this.state);
+  submit = async () => {
+    const { contract } = this.props;
+    const accounts = await web3.eth.getAccounts();
+    await contract.methods.addPharmacy(this.state.pharmacyAddress, this.state.pharmacyName)
+      .send({ from: accounts[0] })
+      .then(() => {
+        console.log('success');
+        this.pushNotification('success', 'Pharmacy is added successfuly');
+        let pharmacies = cloneDeep(this.props.pharmacies);
+        pharmacies.push({name: this.state.pharmacyName, networkAddress: this.state.pharmacyAddress, date: Math.floor(Date.now() / 1000)});
+        this.setState({pharmacyName: "", pharmacyAddress: ""});
+        this.props.setState({pharmacies});
+      })
+      .catch((e)=>{
+        console.log('error');
+        this.pushNotification('error', e.message)
+      })
+  }
+
+  pushNotification = (type, message) => {
+    if (type === 'success') {
+      toast.success(message, {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    } else if (type === 'error') {
+      toast.error(`Error : ${message}`, {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    }
   }
 
   formatDate = (_date) => {
