@@ -9,12 +9,15 @@ export default class Hospitals extends Component {
     let tableBody;
     if (hospitals != null) {
       tableBody = hospitals.map((hospital, index) => {
+        let formattedDate = this.formatDate(hospital.date);
         return (
         <Table.Row key={index}>
-          <Table.Cell>{index+1}</Table.Cell>
+          <Table.Cell>
+            <Label ribbon>{index+1}</Label>
+          </Table.Cell>
           <Table.Cell>{hospital.name}</Table.Cell>
           <Table.Cell>{hospital.networkAddress}</Table.Cell>
-          <Table.Cell>September 14, 2013</Table.Cell>
+          <Table.Cell>{formattedDate}</Table.Cell>
         </Table.Row> 
         );
       });
@@ -40,5 +43,16 @@ export default class Hospitals extends Component {
         </Segment>
       </div>
     )
+  }
+
+  formatDate = (_date) => {
+    let date = new Date(_date*1000);
+    let hours = date.getHours();
+    let minutes = ("0"+date.getMinutes()).substr(-2);
+    let seconds = ("0"+date.getSeconds()).substr(-2);
+    let day = date.getDate();
+    let month = date.getUTCMonth();
+    let year = date.getUTCFullYear();
+    return hours+':'+minutes+':'+seconds+"  "+day+"/"+month+"/"+year;
   }
 }
