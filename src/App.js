@@ -10,6 +10,8 @@ import Pharmacies from './components/Pharmacies';
 import web3 from './web3';
 import contract from './medicalRecordsSystemContract';
 import { contractAddress } from './medicalRecordsSystemContract';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 class App extends Component {
   state = { 
@@ -128,6 +130,7 @@ class App extends Component {
               {this.renderContent()}
             </Container>
           </Container>
+          <ToastContainer/>
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Segment, Table, Grid, Card, Label, Message, Form, Button, Icon} from 'semantic-ui-react'
+import { ToastContainer, toast } from 'react-toastify';
 
 export default class Pharmacies extends Component {
   state = {

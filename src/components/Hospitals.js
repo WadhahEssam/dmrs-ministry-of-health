@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Segment, Table, Grid, Card, Label, Message, Form, Button, Icon} from 'semantic-ui-react'
+import { ToastContainer, toast } from 'react-toastify';
 
 export default class Hospitals extends Component {
   state = {
@@ -102,6 +103,14 @@ export default class Hospitals extends Component {
 
   submit = () => {
     console.log(this.state);
+    toast.success(`${this.state.hospitalAddress}`, {
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    });
   }
 
   formatDate = (_date) => {
