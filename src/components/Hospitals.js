@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
-import { Segment, Table, Grid, Card, Label, Message} from 'semantic-ui-react'
+import { Segment, Table, Grid, Card, Label, Message, Form, Button, Icon} from 'semantic-ui-react'
 
 export default class Hospitals extends Component {
+  state = {
+    hosptialName: "",
+    hospitalAddress: "",
+  }
 
   render() { 
     const { hospitals, isAllowed } = this.props;
@@ -33,8 +37,41 @@ export default class Hospitals extends Component {
     );
     
     const addHospitalSegment = (
-      <Segment>
-        <p>welcome you can go ahead and add</p>
+      <Segment padded>
+          <Form onSubmit={(e)=>{e.preventDefault()}}>
+            <Message color="olive">
+              <p>Once a hospital is added it will be able to retrieve medical records and add new data to them.</p>
+            </Message>
+            <Form.Group widths={2}>
+              <Form.Field>
+                <label>Hospital Name</label>
+                <input 
+                  value={this.state.hospitalName} 
+                  onChange={(e)=>{this.setState({hosptialName: e.target.value})}}
+                  placeholder='eg. King Khaled Hospital' 
+                />
+              </Form.Field>
+              <Form.Field>
+                <label>Hospital Blockchain Address</label>
+                <input 
+                  value={this.state.hospitalAddress} 
+                  onChange={(e)=>{this.setState({hospitalAddress: e.target.value})}}
+                  placeholder='eg. 0x42D2Ac47334A1Ce555945495925c8723FC71C84C' 
+                />
+              </Form.Field>
+            </Form.Group>
+            <Form.Field>
+              <Button 
+                primary 
+                icon 
+                labelPosition='left'
+                onClick={this.submit}
+              >
+                Add Hospital
+                <Icon name='add' />
+              </Button>
+            </Form.Field>
+          </Form>
       </Segment>
     );
 
@@ -61,6 +98,10 @@ export default class Hospitals extends Component {
 
       </div>
     )
+  }
+
+  submit = () => {
+    console.log(this.state);
   }
 
   formatDate = (_date) => {

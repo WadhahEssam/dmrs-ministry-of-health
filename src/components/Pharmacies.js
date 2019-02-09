@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
-import { Segment, Table, Grid, Card, Label, Message} from 'semantic-ui-react'
+import { Segment, Table, Grid, Card, Label, Message, Form, Button, Icon} from 'semantic-ui-react'
 
 export default class Pharmacies extends Component {
+  state = {
+    pharmacyName: "",
+    pharmacyAddress: "",
+  }
+
   render() { 
     const { pharmacies, isAllowed } = this.props;
 
@@ -32,8 +37,41 @@ export default class Pharmacies extends Component {
     );
     
     const addPharmacySegment = (
-      <Segment>
-        <p>welcome you can go ahead and add</p>
+      <Segment padded>
+          <Form onSubmit={(e)=>{e.preventDefault()}}>
+            <Message color="olive">
+              <p>Once a pharmacy is added it will be able to retrieve patient's medical prescriptions.</p>
+            </Message>
+            <Form.Group widths={2}>
+              <Form.Field>
+                <label>Pharmacy Name</label>
+                <input 
+                  value={this.state.pharmacyName} 
+                  onChange={(e)=>{this.setState({pharmacyName: e.target.value})}}
+                  placeholder='eg. Taibah Pharmacy' 
+                />
+              </Form.Field>
+              <Form.Field>
+                <label>Hospital Blockchain Address</label>
+                <input 
+                  value={this.state.pharmacyAddress} 
+                  onChange={(e)=>{this.setState({pharmacyAddress: e.target.value})}}
+                  placeholder='eg. 0x42D2Ac47334A1Ce555945495925c8723FC71C84C'
+                />
+              </Form.Field>
+            </Form.Group>
+            <Form.Field>
+              <Button 
+                primary 
+                icon 
+                labelPosition='left'
+                onClick={this.submit}
+              >
+                Add Pharmacy
+                <Icon name='add' />
+              </Button>
+            </Form.Field>
+          </Form>
       </Segment>
     );
 
@@ -59,6 +97,10 @@ export default class Pharmacies extends Component {
         {(isAllowed) ? addPharmacySegment : notAllowedToAddSegment}
       </div>
     )
+  }
+
+  submit = () => {
+    console.log(this.state);
   }
 
   formatDate = (_date) => {
