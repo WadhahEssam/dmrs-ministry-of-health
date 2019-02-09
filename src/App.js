@@ -97,14 +97,14 @@ class App extends Component {
             </Menu.Item>
             <Menu.Item
               className="menu-item"
-              name="Hospitals"
-              active={activeItem === 'Hospitals'}
+              name="Pharmacies"
+              active={activeItem === 'Pharmacies'}
               onClick={this.handleItemClick}
             />
             <Menu.Item
               className="menu-item"
-              name="Pharmacies"
-              active={activeItem === 'Pharmacies'}
+              name="Hospitals"
+              active={activeItem === 'Hospitals'}
               onClick={this.handleItemClick}
             />
             <Menu.Item

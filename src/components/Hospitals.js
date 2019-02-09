@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Segment, Table, Grid, Card, Label} from 'semantic-ui-react'
+import { Segment, Table, Grid, Card, Label, Message} from 'semantic-ui-react'
 
 export default class Hospitals extends Component {
 
@@ -22,25 +22,43 @@ export default class Hospitals extends Component {
         );
       });
     }
+
+    const notAllowedToAddSegment = (
+      <Segment>
+        <Message negative>
+          <Message.Header>You are not allowed to add</Message.Header>
+          <p>You should log in using the ministry of health account</p>
+        </Message>
+      </Segment>
+    );
     
+    const addHospitalSegment = (
+      <Segment>
+        <p>welcome you can go ahead and add</p>
+      </Segment>
+    );
+
     return (
       <div>
-        <h1 className="menu-title">Hospitals</h1>
-        <Segment padded>
-          <Table>
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell>ID</Table.HeaderCell>
-                <Table.HeaderCell>Hospital Name</Table.HeaderCell>
-                <Table.HeaderCell>Hospital Address</Table.HeaderCell>
-                <Table.HeaderCell>Date</Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
-            <Table.Body>
-              {tableBody}
-            </Table.Body>
-          </Table>
-        </Segment>
+        <h1 className="menu-title">Authenticated Hospitals</h1>
+        <Table>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>ID</Table.HeaderCell>
+              <Table.HeaderCell>Hospital Name</Table.HeaderCell>
+              <Table.HeaderCell>Hospital Address</Table.HeaderCell>
+              <Table.HeaderCell>Date of Submission</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {tableBody}
+          </Table.Body>
+        </Table>
+
+        <div style={{padding: 10}}/>
+        <h1 className="menu-title">Add New Hospital</h1>
+        {(isAllowed) ? addHospitalSegment : notAllowedToAddSegment}
+
       </div>
     )
   }
